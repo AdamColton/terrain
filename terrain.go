@@ -16,7 +16,7 @@ type Terrain struct{
 
 ///// Begin Constructors /////
 
-func PerlinDiscrete(l,w int, vals []int, smoothing int) *Terrain{
+func PerlinDiscrete(l,w int, vals []int, smoothing int) (*Terrain) {
   valsLength := len(vals)
   f_rand := func(i ...int) int{
     return vals[ rand.Intn(valsLength) ]
@@ -36,7 +36,7 @@ func PerlinDiscrete(l,w int, vals []int, smoothing int) *Terrain{
   return &self
 }
 
-func PerlinContinuous(l, w, max int, vals []int, smoothing int)(*Terrain) {
+func PerlinContinuous(l, w, max int, vals []int, smoothing int) (*Terrain) {
   f_rand := func(i ...int) int{
     return rand.Intn(max)
   }
@@ -62,17 +62,17 @@ func PerlinContinuous(l, w, max int, vals []int, smoothing int)(*Terrain) {
   return &self 
 }
 
-func Compound(map1, map2 *Terrain) (*Terrain) {
-  l, w := map1.L, map1.W
-  if map2.L < l { l = map2.L }
-  if map2.W < w { w = map2.W }
+func Compound(terrain1, terrain2 *Terrain) (*Terrain) {
+  l, w := terrain1.L, terrain1.W
+  if terrain2.L < l { l = terrain2.L }
+  if terrain2.W < w { w = terrain2.W }
 
   funcMult := func(x,y int) (int) {
-    return map1.Get(x,y) * map2.Get(x,y)
+    return terrain1.Get(x,y) * terrain2.Get(x,y)
   }
 
   valSet := make(map[int] bool)
-  for i := range Product(map1.Vals, map2.Vals).(chan []int) {
+  for i := range Product(terrain1.Vals, terrain2.Vals).(chan []int) {
     valSet[ i[0] * i[1] ] = true
   }
   vals := make([]int, 0, len(valSet))
