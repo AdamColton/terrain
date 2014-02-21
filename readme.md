@@ -1,7 +1,13 @@
 # Terrain
 
 ## Index
+* [About](#about)
 * [Requirements](#requirements)
+* [func PerlinDiscrete](#func-perlindiscrete)
+* [func PerlinContinuous](#func-perlincontinuous)
+* [func DiamondSquare](#func-diamondsquare)
+* [func Compound](#func-compound)
+* [type Terrain](#type-terrain)
 
 ## About
 Terrain is meant to build 2-dimensional tile maps. All terrains will have a length, width, slice of the integer ids of the tiles and a 2-dimensional slice of size L x W composed of elements in Vals.
