@@ -28,6 +28,7 @@ func PerlinDiscrete(l,w int, vals []int, smoothing int) (*Terrain) {
   }
   
   Looper(smoothing, func() {
+    println("Looping")
     self.Data = Slicer(f_smooth, self.L, self.W).([][]int)
   })
 
@@ -162,6 +163,9 @@ func (self *Terrain) StringMap()([][]string) {
 }
 
 func (self *Terrain) Get(x, y int) (int){
+  x, y = x % self.L, y % self.W
+  if x < 0 { x = x + self.L}
+  if y < 0 { y = y + self.W}
   return self.Data[x % self.L][y % self.W]
 }
 
